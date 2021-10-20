@@ -1,17 +1,16 @@
 package states;
 
-import props.Collider;
-import flixel.group.FlxGroup.FlxTypedGroup;
-import utils.Paths;
-import flixel.FlxSprite;
-import utils.GameInfo;
-import props.Player;
 import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.group.FlxGroup.FlxTypedGroup;
+import props.Collider;
+import props.Player;
+import utils.GameInfo;
+import utils.Paths;
 
 class PlayState extends FlxState
 {
-	public var shitShow:Array<Collider> = [];
 	public var colliderGroup:FlxTypedGroup<Collider>;
 
 	var player:Player;
@@ -19,11 +18,10 @@ class PlayState extends FlxState
 	override public function create()
 	{
 		colliderGroup = new FlxTypedGroup<Collider>();
-		add(colliderGroup);
+		player = new Player(250, 250);
 
 		generateRoom(0);
-
-		player = new Player(250, 250);
+		add(colliderGroup);
 		add(player);
 
 		super.create();
@@ -37,15 +35,6 @@ class PlayState extends FlxState
 
 	function collisionCheck()
 	{
-		for (collider in shitShow)
-		{
-			if (FlxG.collide(player, collider))
-			{
-				//player.setPosition((collider.x - collider.width), (collider.y - collider.height));
-				trace("COLLISION!!!");
-			}
-		}
-
 		if (FlxG.collide(player, colliderGroup))
 		{
 			trace("colliseien???");
@@ -63,13 +52,13 @@ class PlayState extends FlxState
 		{
 			case 0:
 			{
+				trace ("level 0");
 				var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image("levels/" + curLevel + "/bg"));
 				add(bg);
 
 				var bgCollider:Collider = new Collider(0, 185, FlxG.width, 24);
+				add(bgCollider);
 				colliderGroup.add(bgCollider);
-				//add(bgCollider);
-				//shitShow.push(bgCollider);
 
 				/*
 				var bgCollider:FlxSprite = new FlxSprite(0, 185).loadGraphic("assets/images/collider.png");
