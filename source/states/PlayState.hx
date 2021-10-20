@@ -57,7 +57,6 @@ class PlayState extends FlxState
 				add(bg);
 
 				var bgCollider:Collider = new Collider(0, 185, FlxG.width, 24);
-				add(bgCollider);
 				colliderGroup.add(bgCollider);
 
 				/*
